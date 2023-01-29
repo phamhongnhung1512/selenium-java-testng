@@ -1,13 +1,18 @@
 package webdriver;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_00_Template {
+public class Topic_05_Web_Browser {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 
@@ -16,13 +21,23 @@ public class Topic_00_Template {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-		driver.get("https://www.facebook.com/");
-	}
+		}
 
 	@Test
-	public void TC_01_ValidateCurrentUrl() {
-		}
+	public void TC_01_Url() {
+		driver.get("http://live.techpanda.org/");
+		//Page login
+		driver.findElement(By.xpath("//div[@class ='footer']//a[@title ='My Account']")).click();
+		sleepInSecond(3);
+		
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
+		
+		//Create an account
+		driver.findElement(By.xpath("//a [@title ='Create an Account']")).click();
+		sleepInSecond(3);
+		
+		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
+		driver.close();		}
 
 	@Test
 	public void TC_02_ValidatePageTitle() {
@@ -38,7 +53,8 @@ public class Topic_00_Template {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
 	@AfterClass
 	public void afterClass() {
 		}
