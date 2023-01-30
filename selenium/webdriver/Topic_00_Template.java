@@ -38,6 +38,7 @@ public class Topic_00_Template {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
 		
 	@AfterClass
 	public void afterClass() {

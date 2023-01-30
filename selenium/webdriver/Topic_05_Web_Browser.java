@@ -1,11 +1,12 @@
 package webdriver;
 
-import static org.testng.Assert.assertEquals;
-
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -17,45 +18,27 @@ public class Topic_05_Web_Browser {
 	String projectPath = System.getProperty("user.dir");
 
 	@BeforeClass
-	public void beforeClass() {
+	public void BeforeClass() {
 		System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		}
-
 	@Test
-	public void TC_01_Url() {
+	public void TC_01_() {
+		// >=2 tab thi đóng tab/window ma no dang dung, neu co 1 tab thi dong Browser
+		//driver.close();
+		// đóng Browser(ko quan tam co bao tab/window)
+		//driver.quit();
+		// mở 1 url
 		driver.get("http://live.techpanda.org/");
-		//Page login
-		driver.findElement(By.xpath("//div[@class ='footer']//a[@title ='My Account']")).click();
-		sleepInSecond(3);
-		
-		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
-		
-		//Create an account
-		driver.findElement(By.xpath("//a [@title ='Create an Account']")).click();
-		sleepInSecond(3);
-		
-		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
-		driver.close();		}
-
-	@Test
-	public void TC_02_ValidatePageTitle() {
-		}
-
-	@Test
-	public void TC_03_LoginFormDisplayed() {
-		}
-
-	public void sleepInSecond(long timeInSecond) {
-		try {
-			Thread.sleep(timeInSecond*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		// get url hien tai
+		driver.getCurrentUrl();
+		// tim 1 element, dat bien 
+		WebElement searchTextbox = driver.findElement(By.xpath("//input[@id ='search']")); 
+		// tim n element
+		List<WebElement> links = driver.findElements(By.xpath("//div[@class ='links']"));
+		//tra ve pagesource
+		driver.getPageSource();
+		Assert.assertTrue(driver.getPageSource().contains("2015 Magento Demo Store. All Rights Reserved."));
 		}
 	}
-	
-	@AfterClass
-	public void afterClass() {
-		}
-}
