@@ -6,14 +6,12 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_05_Web_Browser {
+public class Topic_05_Web_Browser_PI {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 
@@ -34,11 +32,16 @@ public class Topic_05_Web_Browser {
 		// get url hien tai
 		driver.getCurrentUrl();
 		// tim 1 element, dat bien 
-		WebElement searchTextbox = driver.findElement(By.xpath("//input[@id ='search']")); 
+		WebElement searchTextbox = driver.findElement(By.xpath("//input[@id ='search']"));
+		searchTextbox.sendKeys("kimnganle@gmail.com");
 		// tim n element
 		List<WebElement> links = driver.findElements(By.xpath("//div[@class ='links']"));
+		links.size();
 		//tra ve pagesource
 		driver.getPageSource();
 		Assert.assertTrue(driver.getPageSource().contains("2015 Magento Demo Store. All Rights Reserved."));
 		}
+	private void Click() {
+		// TODO Auto-generated method stub
+	}
 	}
