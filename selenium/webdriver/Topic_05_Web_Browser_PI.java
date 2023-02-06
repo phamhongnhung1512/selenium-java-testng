@@ -41,7 +41,4 @@ public class Topic_05_Web_Browser_PI {
 		driver.getPageSource();
 		Assert.assertTrue(driver.getPageSource().contains("2015 Magento Demo Store. All Rights Reserved."));
 		}
-	private void Click() {
-		// TODO Auto-generated method stub
-	}
-	}
+}
