@@ -1,7 +1,5 @@
 package webdriver;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -29,12 +27,12 @@ public class Topic_05_Web_Browser_PII {
 		driver.get("http://live.techpanda.org/");
 		//Click my account
 		driver.findElement(By.xpath("//div [@class =\"footer\"]//a[@title =\"My Account\"]")).click();
-		sleepInSecond(3);
+		sleepInSecond(1);
 		//Verify current url login
 		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");	
 		//Click create an account
 		driver.findElement(By.xpath("//a[@title ='Create an Account']")).click();
-		sleepInSecond(3);
+		sleepInSecond(1);
 		//Verify current url create account
 		Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");		
 		}
@@ -61,11 +59,12 @@ public class Topic_05_Web_Browser_PII {
 		driver.findElement(By.xpath("//div [@class =\"footer\"]//a[@title =\"My Account\"]")).click();
 		//Click create an account
 		driver.findElement(By.xpath("//a[@title ='Create an Account']")).click();
+		sleepInSecond(2);
 		//Verify current url create account
 		Assert.assertEquals(driver.getCurrentUrl(),"http://live.techpanda.org/index.php/customer/account/create/");	
 		//back to previous page
 		driver.navigate().back();
-		sleepInSecond(3);
+		sleepInSecond(2);
 		//Verify previous url 
 		Assert.assertEquals(driver.getCurrentUrl(),"http://live.techpanda.org/index.php/customer/account/login/");	
 		//forward to next page
@@ -75,10 +74,15 @@ public class Topic_05_Web_Browser_PII {
 		}
 	@Test
 	public void Browser_TC_04_GetPageSourceCode() {
-		
+		//Open link
+		driver.get("http://live.techpanda.org/");
+		//Click my account
+		driver.findElement(By.xpath("//div [@class =\"footer\"]//a[@title =\"My Account\"]")).click();
+		sleepInSecond(3);
+		//Verify chua text
+		Assert.assertTrue(driver.getPageSource().contains("Login or Create an Account"));
 	}
-	
-	public void sleepInSecond(long timeInSecond) {
+		public void sleepInSecond(long timeInSecond) {
 		try {
 			Thread.sleep(timeInSecond*1000);
 		} catch (InterruptedException e) {
