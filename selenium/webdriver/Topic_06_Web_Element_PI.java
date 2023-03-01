@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -23,10 +24,8 @@ public class Topic_06_Web_Element_PI {
 	@Test
 	public void TC_01_WebElement() {
 		driver.get("https://demo.nopcommerce.com/login?returnUrl=%2F");
-		//lay ra the HTML cua element -> truyen vao cho 1 locator khac
-		String emailTextBoxTagname = driver.findElement(By.id("Email")).getTagName();
-		driver.findElement(By.xpath("//"+ emailTextBoxTagname +"[@id ='email']"));
-		
+		WebElement element = driver.findElement(By.id("Email"));
+		element.getTagName();
 		}
 
 	@Test
