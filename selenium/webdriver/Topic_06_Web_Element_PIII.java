@@ -1,7 +1,5 @@
 package webdriver;
 
-import static org.testng.Assert.assertTrue;
-
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
@@ -142,6 +140,6 @@ public class Topic_06_Web_Element_PIII {
 		
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+		//driver.quit();
 		}
 }

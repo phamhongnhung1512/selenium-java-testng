@@ -1,6 +1,5 @@
 package webdriver;
 
-import static org.testng.Assert.assertTrue;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
