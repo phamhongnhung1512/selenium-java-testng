@@ -3,6 +3,7 @@ package webdriver;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -14,8 +15,7 @@ public class Topic_07_Textbox_TextArea {
 	WebDriver driver;
 	Random rand;
 	String projectPath = System.getProperty("user.dir");
-	String firstName,middleName,lastName;
-	String employeeID = String.valueOf(rand.nextInt(99999));
+	String firstName,middleName,lastName, employeeID, userName;
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -26,6 +26,8 @@ public class Topic_07_Textbox_TextArea {
 		firstName = "Lee";
 		middleName = "Sun";
 		lastName ="Jae";
+		employeeID = String.valueOf(rand.nextInt(99999));
+		userName = String.valueOf(rand.nextInt(99999)) + firstName;
 	}
 
 	@Test
@@ -37,9 +39,9 @@ public class Topic_07_Textbox_TextArea {
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		sleepInSecond(3);
 		//Open PIM screen
-		driver.findElement(By.xpath("//ul[@class='oxd-main-menu']//span[text()='Admin']")).click();
+		driver.findElement(By.xpath("//ul[@class='oxd-main-menu']//span[text()='PIM']")).click();
 		sleepInSecond(3);
-		//Open Employee screen
+		//Open Employee tab
 		driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
 		sleepInSecond(3);
 		//Input validate thong tin 
@@ -47,18 +49,21 @@ public class Topic_07_Textbox_TextArea {
 		driver.findElement(By.name("middleName")).sendKeys(middleName);
 		driver.findElement(By.name("lastName")).sendKeys(lastName);
 		driver.findElement(By.xpath("//span[@class='oxd-switch-input oxd-switch-input--active --label-right']")).click();
+		driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div//following-sibling::div//input")).sendKeys(Keys.chord(Keys.CONTROL,"a"));
+		driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div//following-sibling::div//input")).sendKeys(Keys.DELETE);
 		driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div//following-sibling::div//input")).sendKeys(employeeID);
-		driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div//input")).sendKeys("leesunjae");
+		driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div//input")).sendKeys(userName);
 		driver.findElement(By.xpath("//label[text()='Password']/parent::div/following-sibling::div//input")).sendKeys("Abc123456!");
 		driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div//input")).sendKeys("Abc123456!");
 		//Click Save button
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		sleepInSecond(5);
+		sleepInSecond(7);
 		//Verify information 
 		Assert.assertEquals(driver.findElement(By.xpath("//input[@name='firstName']")).getAttribute("value"),firstName);
 		Assert.assertEquals(driver.findElement(By.xpath("//input[@name='middleName']")).getAttribute("value"),middleName);
 		Assert.assertEquals(driver.findElement(By.xpath("//input[@name='lastName']")).getAttribute("value"),lastName);
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text() ='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),employeeID);
+		sleepInSecond(3);
 		//Open Immigration tab
 		driver.findElement(By.xpath("//a[text()='Immigration']")).click();
 		driver.findElement(By.xpath("//h6[text()='Assigned Immigration Records']/following-sibling::button[@class='oxd-button oxd-button--medium oxd-button--text']")).click();
@@ -68,6 +73,7 @@ public class Topic_07_Textbox_TextArea {
 		sleepInSecond(5);
 		//Edit information
 		driver.findElement(By.xpath("//i[@class='oxd-icon bi-pencil-fill']")).click();
+		sleepInSecond(5);
 		//Verify information
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),"0904686868");
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Comments']/parent::div/following-sibling::div/textarea")).getAttribute("value"),"This is\na good automation testing course");
@@ -76,19 +82,22 @@ public class Topic_07_Textbox_TextArea {
 		driver.findElement(By.xpath("//a[text()='Logout']")).click();
 		sleepInSecond(5);
 		//Log in by user in above step
-		driver.findElement(By.name("username")).sendKeys("leesunjae");
+		driver.findElement(By.name("username")).sendKeys(userName);
 		driver.findElement(By.name("password")).sendKeys("Abc123456!");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		//Open My info screen
 		driver.findElement(By.xpath("//span[text()='My Info']")).click();
+		sleepInSecond(3);
 		Assert.assertEquals(driver.findElement(By.xpath("//input[@name='firstName']")).getAttribute("value"),firstName);
 		Assert.assertEquals(driver.findElement(By.xpath("//input[@name='middleName']")).getAttribute("value"),middleName);
 		Assert.assertEquals(driver.findElement(By.xpath("//input[@name='lastName']")).getAttribute("value"),lastName);
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),employeeID);
+		sleepInSecond(3);
 		//Open Immigration tab
 		driver.findElement(By.xpath("//a[text()='Immigration']")).click();
 		sleepInSecond(3);
 		driver.findElement(By.xpath("//i[@class='oxd-icon bi-pencil-fill']")).click();
+		sleepInSecond(3);
 		//Verify information	
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),"0904686868");
 		Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Comments']/parent::div/following-sibling::div/textarea")).getAttribute("value"),"This is\na good automation testing course");
@@ -109,6 +118,6 @@ public class Topic_07_Textbox_TextArea {
 		
 	@AfterClass
 	public void afterClass() {
-		//driver.quit();
+		driver.quit();
 		}
 }
