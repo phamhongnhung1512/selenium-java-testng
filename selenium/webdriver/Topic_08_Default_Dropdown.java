@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,9 +15,9 @@ import org.testng.annotations.Test;
 public class Topic_08_Default_Dropdown {
 	WebDriver driver;
 	Random rand;
+	Select Select;
 	String projectPath = System.getProperty("user.dir");
-	String customerID, emailCustomer;
-	
+	String firstName, lastName, emailUser, password;
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -24,70 +25,56 @@ public class Topic_08_Default_Dropdown {
 		rand = new Random();
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
-		emailCustomer = "sunlee"+ String.valueOf(rand.nextInt(99999));
+		firstName ="Lee";
+		lastName ="Sun Jae";
+		emailUser ="sunlee" + rand.nextInt(9999)+"@gmail.com";
+		password ="Abc123456@";
 		}
 
 	@Test
 	public void TC_01_Create_New_Employee() {
-		//Login successfully
-		driver.get("http://demo.guru99.com/v4");
-		driver.findElement(By.name("uid")).sendKeys("mngr483191");
-		driver.findElement(By.name("password")).sendKeys("jYhuqYn");
-		driver.findElement(By.name("btnLogin")).click();
-		sleepInSecond(3);
-		//Open new customer screen
-		driver.findElement(By.xpath("//a[text()='New Customer']")).click();
-		sleepInSecond(3);
-		//Input validate information
-		driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td/input")).sendKeys("Lee Sun Jae");
-		driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td/input[@value='f']")).click();
-		driver.findElement(By.xpath("//td[text()='Date of Birth']/following-sibling::td/input")).sendKeys("15121991");
-		driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td/textarea")).sendKeys("this is a good course Thanks");
-		driver.findElement(By.xpath("//td[text()='City']/following-sibling::td/input")).sendKeys("Hanoi");
-		driver.findElement(By.xpath("//td[text()='State']/following-sibling::td/input")).sendKeys("VinhBacBo");
-		driver.findElement(By.xpath("//td[text()='PIN']/following-sibling::td/input")).sendKeys("012345");		
-		driver.findElement(By.xpath("//td[text()='Mobile Number']/following-sibling::td/input")).sendKeys("0904686871");
-		driver.findElement(By.xpath("//td[text()='E-mail']/following-sibling::td/input")).sendKeys(emailCustomer+"@gmail.com");
-		driver.findElement(By.xpath("//td[text()='Password']/following-sibling::td/input")).sendKeys("Abc1234567!");
-		driver.findElement(By.name("sub")).click();
-		sleepInSecond(3);
-		//Get CustomerID
-		driver.findElement(By.xpath("//td[text() ='Customer ID']/following-sibling::td")).getText();
-		customerID = driver.findElement(By.xpath("//td[text() ='Customer ID']/following-sibling::td")).getText();
-		//Verify information of registered customer
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Customer Name']/following-sibling::td")).getText(),"Lee Sun Jae");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Gender']/following-sibling::td")).getText(),"female");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Birthdate']/following-sibling::td")).getText(),"1991-12-15");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Address']/following-sibling::td")).getText(),"this is a good course Thanks");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='City']/following-sibling::td")).getText(),"Hanoi");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='State']/following-sibling::td")).getText(),"VinhBacBo");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Pin']/following-sibling::td")).getText(),"012345");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Mobile No.']/following-sibling::td")).getText(),"0904686871");
-		Assert.assertEquals(driver.findElement(By.xpath("//td[text() ='Email']/following-sibling::td")).getText(),emailCustomer+"@gmail.com");
-		//Open Edit customer
-		driver.findElement(By.xpath("//a[text()='Edit Customer']")).click();
-		sleepInSecond(3);
-		driver.findElement(By.name("cusid")).sendKeys(customerID);
-		driver.findElement(By.name("AccSubmit")).click();
-		sleepInSecond(3);
-		//Verify information in Edit screen
-		driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td/input")).getAttribute("value");
-		driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td/textarea")).getText();
-		//Edit information in Edit screen
-		driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td/textarea")).clear();
-		driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td/textarea")).sendKeys("Now we have another good course manythank");
-		driver.findElement(By.xpath("//td[text()='State']/following-sibling::td/input")).clear();
-		driver.findElement(By.xpath("//td[text()='State']/following-sibling::td/input")).sendKeys("Dongbangsonghong");
-		driver.findElement(By.xpath("//td[text()='City']/following-sibling::td/input")).clear();
-		driver.findElement(By.xpath("//td[text()='City']/following-sibling::td/input")).sendKeys("Hatay");
-		driver.findElement(By.xpath("//td[text()='PIN']/following-sibling::td/input")).clear();	
-		driver.findElement(By.xpath("//td[text()='PIN']/following-sibling::td/input")).sendKeys("123456");		
-		driver.findElement(By.xpath("//td[text()='Mobile Number']/following-sibling::td/input")).clear();
-		driver.findElement(By.xpath("//td[text()='Mobile Number']/following-sibling::td/input")).sendKeys("0904686868");
-		driver.findElement(By.xpath("//td[text()='E-mail']/following-sibling::td/input")).clear();
-		driver.findElement(By.xpath("//td[text()='E-mail']/following-sibling::td/input")).sendKeys(emailCustomer+"2"+"@gmail.com");
-		driver.findElement(By.name("sub")).click();
+		//Open register screen
+		driver.get("https://demo.nopcommerce.com/");
+		driver.findElement(By.xpath("//a[@class='ico-register']")).click();
 		sleepInSecond(3);		
+		//Input validate information
+		driver.findElement(By.xpath("//input[@id='gender-male']")).click();
+		driver.findElement(By.xpath("//input[@id='FirstName']")).sendKeys("Lee");
+		driver.findElement(By.xpath("//input[@id='LastName']")).sendKeys(lastName);
+		driver.findElement(By.xpath("//input[@id='Email']")).sendKeys(emailUser);
+		new Select(driver.findElement(By.name("DateOfBirthDay"))).selectByVisibleText("15");
+		new Select(driver.findElement(By.name("DateOfBirthMonth"))).selectByVisibleText("July");
+		new Select(driver.findElement(By.name("DateOfBirthYear"))).selectByVisibleText("1991");
+		driver.findElement(By.name("Password")).sendKeys(password);
+		driver.findElement(By.name("ConfirmPassword")).sendKeys(password);
+		
+		//Verify so luong item trong tung dropdown
+		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthDay"))).getOptions(),"32");
+		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthMonth"))).getOptions(),"12");
+		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthYear"))).getOptions(),"112");
+				
+		//Click register
+		driver.findElement(By.name("register-button")).click();
+		sleepInSecond(3);
+		//Verify register successfully
+		Assert.assertTrue(driver.getPageSource().contains("Your registration completed"));
+		//Open my account screen
+		driver.findElement(By.xpath("//a[text()='My account']")).click();
+		//Login
+		driver.findElement(By.name("Email")).sendKeys(emailUser);
+		driver.findElement(By.name("Password")).sendKeys(password);
+		driver.findElement(By.cssSelector("button[class='button-1 login-button']")).click();
+		sleepInSecond(3);
+		
+		//Verify information
+		Assert.assertEquals(driver.findElement(By.xpath("//input[@id='gender-male']")).getAttribute("value"),"M");
+		Assert.assertEquals(driver.findElement(By.name("FirstName")).getAttribute("value"),firstName);
+		Assert.assertEquals(driver.findElement(By.name("LastName")).getAttribute("value"),lastName);
+		Assert.assertEquals(driver.findElement(By.name("Email")).getAttribute("value"),emailUser);
+		Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthDay"))).getFirstSelectedOption(),"15");
+		Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthMonth"))).getFirstSelectedOption(),"July");
+		Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthYear"))).getFirstSelectedOption(),"1991");
+				
 		}
 	@Test
 	public void TC_02() {

@@ -28,6 +28,8 @@ public class Topic_07_Textbox_TextArea_PI {
 		lastName ="Jae";
 		employeeID = String.valueOf(rand.nextInt(99999));
 		userName = String.valueOf(rand.nextInt(99999)) + firstName;
+		employeeID = String.valueOf(rand.nextInt(99999));
+
 	}
 
 	@Test
