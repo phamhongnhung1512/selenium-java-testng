@@ -39,7 +39,7 @@ public class Topic_08_Default_Dropdown {
 		sleepInSecond(3);		
 		//Input validate information
 		driver.findElement(By.xpath("//input[@id='gender-male']")).click();
-		driver.findElement(By.xpath("//input[@id='FirstName']")).sendKeys("Lee");
+		driver.findElement(By.xpath("//input[@id='FirstName']")).sendKeys(firstName);
 		driver.findElement(By.xpath("//input[@id='LastName']")).sendKeys(lastName);
 		driver.findElement(By.xpath("//input[@id='Email']")).sendKeys(emailUser);
 		new Select(driver.findElement(By.name("DateOfBirthDay"))).selectByVisibleText("15");
@@ -49,7 +49,8 @@ public class Topic_08_Default_Dropdown {
 		driver.findElement(By.name("ConfirmPassword")).sendKeys(password);
 		
 		//Verify so luong item trong tung dropdown
-		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthDay"))).getOptions(),"32");
+		driver.findElements(By.xpath("//select[@name='DateOfBirthDay']/option")).size();
+		//Assert.assertEquals(driver.findElement(By.xpath("//select[@name='DateOfBirthDay']/option")).getSize(),"32");
 		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthMonth"))).getOptions(),"12");
 		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthYear"))).getOptions(),"112");
 				
