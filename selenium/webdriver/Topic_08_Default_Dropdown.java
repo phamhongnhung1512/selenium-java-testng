@@ -3,7 +3,6 @@ package webdriver;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -45,14 +44,15 @@ public class Topic_08_Default_Dropdown {
 		new Select(driver.findElement(By.name("DateOfBirthDay"))).selectByVisibleText("15");
 		new Select(driver.findElement(By.name("DateOfBirthMonth"))).selectByVisibleText("July");
 		new Select(driver.findElement(By.name("DateOfBirthYear"))).selectByVisibleText("1991");
+	
+		
 		driver.findElement(By.name("Password")).sendKeys(password);
 		driver.findElement(By.name("ConfirmPassword")).sendKeys(password);
 		
 		//Verify so luong item trong tung dropdown
 		driver.findElements(By.xpath("//select[@name='DateOfBirthDay']/option")).size();
-		//Assert.assertEquals(driver.findElement(By.xpath("//select[@name='DateOfBirthDay']/option")).getSize(),"32");
-		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthMonth"))).getOptions(),"12");
-		//Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthYear"))).getOptions(),"112");
+		Assert.assertEquals(driver.findElements(By.xpath("//select[@name='DateOfBirthDay']/option")).size(),"32");
+		
 				
 		//Click register
 		driver.findElement(By.name("register-button")).click();
