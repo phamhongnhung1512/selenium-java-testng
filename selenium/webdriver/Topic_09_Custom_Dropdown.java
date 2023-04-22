@@ -42,13 +42,23 @@ public class Topic_09_Custom_Dropdown {
 		//Wait de show all item
 		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("li.ui-menu-item")));
 		List<WebElement> speedDropdownItems = driver.findElements(By.cssSelector("li.ui-menu-item"));
+		//Chon item
 		for (WebElement tempItem : speedDropdownItems) {
 			String itemText = tempItem.getText();
 			if (itemText.equals("Fast") ) {
 				tempItem.click();
+				System.out.println (itemText);
+				System.out.println("click item");
 				break;
 				}
-			}		
+			else {
+				System.out.println (itemText);
+				System.out.println("ko click item");
+				}
+			}	
+		//Kiem tra item da dc chon 
+		driver.findElement(By.cssSelector("span#speed-button")).getText();
+		Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button")).getText(), "Fast");
 		}
 	@Test
 	public void TC_02() {
