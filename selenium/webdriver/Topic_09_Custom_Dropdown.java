@@ -41,9 +41,9 @@ public class Topic_09_Custom_Dropdown {
 		//Click de xo ra item in dropdownlist
 		driver.findElement(By.cssSelector("span#speed-button")).click();
 		//Wait de show all item
-		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("li.ui-menu-item")));
-		List<WebElement> speedDropdownItems = driver.findElements(By.cssSelector("li.ui-menu-item"));
-		//Chon item
+		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#speed-menu>li.ui-menu-item")));
+		List<WebElement> speedDropdownItems = driver.findElements(By.cssSelector("ul#speed-menu>li.ui-menu-item"));
+		//Chon item dung vong 
 		for (WebElement tempItem : speedDropdownItems) {
 			String itemText = tempItem.getText();
 			if (itemText.equals("Fast") ) {
@@ -53,7 +53,6 @@ public class Topic_09_Custom_Dropdown {
 				}
 			}	
 		//Kiem tra item da dc chon 
-		driver.findElement(By.cssSelector("span#speed-button")).getText();
 		Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button>span.ui-selectmenu-text")).getText(), "Fast");
 		}
 	@Test
@@ -75,6 +74,11 @@ public class Topic_09_Custom_Dropdown {
 			}
 		}
 
+			
+	@AfterClass
+	public void afterClass() {
+		//driver.quit();
+		}
 	public void sleepInSecond(long timeInSecond) {
 		try {
 			Thread.sleep(timeInSecond*1000);
@@ -82,9 +86,4 @@ public class Topic_09_Custom_Dropdown {
 			e.printStackTrace();
 		}
 	}
-		
-	@AfterClass
-	public void afterClass() {
-		//driver.quit();
-		}
 }
