@@ -36,6 +36,7 @@ public class Topic_09_Custom_Dropdown {
 
 	@Test
 	public void TC_01_Test_JQuery() {
+		//Open link
 		driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
 		//Click de xo ra item in dropdownlist
 		driver.findElement(By.cssSelector("span#speed-button")).click();
@@ -48,21 +49,30 @@ public class Topic_09_Custom_Dropdown {
 			if (itemText.equals("Fast") ) {
 				tempItem.click();
 				System.out.println (itemText);
-				System.out.println("click item");
 				break;
-				}
-			else {
-				System.out.println (itemText);
-				System.out.println("ko click item");
 				}
 			}	
 		//Kiem tra item da dc chon 
 		driver.findElement(By.cssSelector("span#speed-button")).getText();
-		Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button")).getText(), "Fast");
+		Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button>span.ui-selectmenu-text")).getText(), "Fast");
 		}
 	@Test
-	public void TC_02() {
-		
+	public void TC_02_Test_ReactJS() {
+		//Open link
+		driver.get("https://mikerodham.github.io/vue-dropdowns/");
+		//Click de xo ra item in dropdownlist
+		driver.findElement(By.cssSelector("li.dropdown-toggle")).click();
+		//Wait show all items
+		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//ul[@class='dropdown-menu']//a")));
+		List <WebElement> dropdownMenuItem = driver.findElements(By.xpath("//ul[@class='dropdown-menu']//a"));
+		//Chon item
+		for(WebElement temItemInDropdownMenu: dropdownMenuItem  ) {
+			String selectedItem = temItemInDropdownMenu.getText();
+			if (selectedItem.equals("Second Option")) {
+				temItemInDropdownMenu.click();
+				break;
+				}
+			}
 		}
 
 	public void sleepInSecond(long timeInSecond) {
