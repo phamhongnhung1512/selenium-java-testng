@@ -54,10 +54,10 @@ public class Topic_10_Button_Radio_Checkbox {
 		//Verify button dang nhap is enable
 		loginButtonBackground = driver.findElement(loginButton).getCssValue("background-color");
 		Color loginButtonBackgroundColor = Color.fromString(loginButtonBackground);
-		Assert.assertEquals(loginButtonBackgroundColor.asHex().toUpperCase(), "#C92127");
-			
+		Assert.assertEquals(loginButtonBackgroundColor.asHex().toUpperCase(), "#C92127");		
 		}
-	@Test
+	
+	//@Test
 	public void TC_02_Default_Checkbox_Or_Radio() {
 		//Open link
 		driver.get("https://demos.telerik.com/kendo-ui/checkbox/index");	
@@ -69,7 +69,36 @@ public class Topic_10_Button_Radio_Checkbox {
 		driver.findElement(By.xpath("//label[text()=\"Dual-zone air conditioning\"]/preceding-sibling::input")).click();
 		//Kiem tra checkbox da dc chon
 		Assert.assertFalse(driver.findElement(By.xpath("//label[text()=\"Dual-zone air conditioning\"]/preceding-sibling::input")).isSelected());
+		
+		//Open link
+		driver.get("http://demos.telerik.com/kendo-ui/styling/radios");
+		//Click vao 1 checkbox
+		driver.findElement(By.xpath("//label[text()=\"2.0 Petrol, 147kW\"]/preceding-sibling::input")).click();
+		//Check radio da dc chon hay chua
+		Assert.assertTrue(driver.findElement(By.xpath("//label[text()=\"2.0 Petrol, 147kW\"]/preceding-sibling::input")).isSelected());	
+		}
+	
+	@Test
+		public void TC_03_Default_Checkbox_Or_Radio() {
+			//Open link
+			driver.get("https://material.angular.io/components/radio/examples");
+			sleepInSecond(5);
+			//Click 1 checkbox
+			driver.findElement(By.xpath("//label[text()=' Summer ']/preceding-sibling::div/input")).click();
+			//Check radio da dc chon hay chua. neu chua con thi click vao
+			if(!driver.findElement(By.xpath("//label[text()=' Summer ']/preceding-sibling::div/input")).isSelected()) {
+				driver.findElement(By.xpath("//label[text()=' Summer ']/preceding-sibling::div/input")).click();
+				}
+			//Check radio dc chon chua
+			Assert.assertTrue(driver.findElement(By.xpath("//label[text()=' Summer ']/preceding-sibling::div/input")).isSelected());
 			
+			
+			//Open link
+			driver.get("https://material.angular.io/components/checkbox/examples");
+			//Click 1 checkbox
+			sleepInSecond(5);
+			driver.findElement(By.xpath("//label[text()='Checked']//preceding-sibling::div")).click();		
+			driver.findElement(By.xpath("//label[text()='Indeterminate']")).click();						
 			}
 			
 	@AfterClass
