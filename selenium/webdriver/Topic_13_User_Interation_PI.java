@@ -17,7 +17,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_13_User_Interation {
+public class Topic_13_User_Interation_PI {
 	WebDriver driver;
 	Actions action;
 	JavascriptExecutor jsExecutor;
