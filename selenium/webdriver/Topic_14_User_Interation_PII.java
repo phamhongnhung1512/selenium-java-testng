@@ -2,7 +2,6 @@ package webdriver;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -75,8 +74,7 @@ public class Topic_14_User_Interation_PII {
 		action.keyUp(Keys.CONTROL).perform();
 		//Verify lua chon
 		List<WebElement> listSelectedNumber = driver.findElements(By.xpath("//li[contains(@class,'ui-selected')]"));
-		Assert.assertEquals(listSelectedNumber.size(), 4);
-				
+		Assert.assertEquals(listSelectedNumber.size(), 4);	
 		}
 	
 	@Test
@@ -100,10 +98,8 @@ public class Topic_14_User_Interation_PII {
 		sleepInSecond(3);
 		//Verify Quit menu khong con dc hien thi
 		Assert.assertFalse(driver.findElement(By.cssSelector("li.context-menu-icon-quit")).isDisplayed());
-
 		}
-		
-		
+			
 	@AfterClass
 	public void afterClass() {
 		//driver.quit();
